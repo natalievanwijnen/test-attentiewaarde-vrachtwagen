@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Attentiewaarde Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    <style>
+      :root {
+        --primair: #009ee2;
+        --secundair: #54595f;
+        --tekst: #7a7a7a;
+        --accent: #61ce70;
+        --subtiel: #e0e0e0;
+      }
+
+      body {
+        color: var(--tekst);
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        margin: 2em auto;
+        max-width: 500px;
+      }
+      h2 {
+        color: var(--secundair);
+      }
+      label,
+      input {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input {
+        border: 0.5px solid var(--tekst);
+        border-radius: 20px;
+        font-family: "Montserrat", sans-serif;
+        padding: 10px 20px;
+        width: 100%;
+      }
+      .result {
+        color: var(--secundair);
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+      button {
+        background-color: var(--accent);
+        border: none;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1em;
+        margin-top: 20px;
+        padding: 10px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Attentiewaarde Vrachtwagenreclame</h2>
+
+    <label>Aantal vrachtwagens:</label>
+    <input type="number" id="vrachtwagens" value="1" />
+
+    <label>Kilometers per dag per vrachtwagen:</label>
+    <input type="number" id="kilometers" value="300" />
+
+    <label>Werkdagen per maand:</label>
+    <input type="number" id="werkdagen" value="22" />
+
+    <input type="hidden" id="impressies" value="5" />
+
+    <div class="result" id="output">Maandelijkse impressies: 33.000</div>
+
+    <button onclick="getReport()">Ontvang rapport</button>
+
+    <script>
+      function calculate() {
+        let vrachtwagens = parseInt(
+          document.getElementById("vrachtwagens").value
+        );
+        let kilometers = parseInt(document.getElementById("kilometers").value);
+        let werkdagen = parseInt(document.getElementById("werkdagen").value);
+        let impressies = 5;
+
+        let totaal = vrachtwagens * kilometers * werkdagen * impressies;
+        document.getElementById("output").textContent =
+          "Maandelijkse impressies: " + totaal.toLocaleString("nl-NL");
+
+        return totaal;
+      }
+
+      function getReport() {
+        let totaal = calculate();
+        alert(
+          "Je ontvangt binnenkort een rapport met een schatting van " +
+            totaal.toLocaleString("nl-NL") +
+            " maandelijkse impressies.\n\nNotitie: Deze knop kan worden gekoppeld aan een e-mailformulier of download."
+        );
+      }
+
+      document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", calculate);
+      });
+
+      calculate();
+    </script>
+  </body>
+</html>
