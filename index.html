@@ -16,35 +16,60 @@
         --accent: #61ce70;
         --subtiel: #e0e0e0;
       }
-
       body {
-        color: var(--tekst);
+        background: var(--primair);
         font-family: "Montserrat", sans-serif;
-        font-size: 14px;
         margin: 2em auto;
         max-width: 500px;
       }
+      .form-wrapper {
+        background-color: white;
+        border-radius: 25px;
+        padding: 20px;
+      }
+      h2,
+      p,
+      .result {
+        text-align: center;
+      }
       h2 {
         color: var(--secundair);
+        margin-bottom: -10px;
+      }
+      p {
+        color: var(--tekst);
+        font-size: 14px;
+        margin-bottom: 20px;
       }
       label,
       input {
+        color: var(--secundair);
         display: block;
+        font-size: 14px;
+        font-weight: 500;
         margin-bottom: 10px;
       }
       input {
         border: 0.5px solid var(--tekst);
         border-radius: 20px;
+        color: var(--secundair);
         font-family: "Montserrat", sans-serif;
-        padding: 10px 20px;
+        font-weight: 300;
+        padding: 10px;
         width: 100%;
       }
+
+      ::placeholder {
+        color: var(--tekst);
+      }
+
       .result {
-        color: var(--secundair);
+        color: var(--accent);
         font-size: 1.2em;
         font-weight: bold;
-        margin-top: 20px;
+        margin: 20px 0 50px 0;
       }
+
       button {
         background-color: var(--accent);
         border: none;
@@ -52,29 +77,42 @@
         color: white;
         cursor: pointer;
         font-family: "Montserrat", sans-serif;
-        font-size: 1em;
+        font-size: 14px;
         margin-top: 20px;
         padding: 10px 20px;
+        width: 100%;
       }
     </style>
   </head>
   <body>
-    <h2>Attentiewaarde Vrachtwagenreclame</h2>
+    <div class="form-wrapper">
+      <h2>Attentiewaarde vrachtwagenreclame</h2>
+      <p>Bereken het bereik van jouw vloot in een paar seconden.</p>
 
-    <label>Aantal vrachtwagens:</label>
-    <input type="number" id="vrachtwagens" value="1" />
+      <label>Hoeveel vrachtwagens heb je in je vloot?*</label>
+      <input type="number" id="vrachtwagens" value="1" />
 
-    <label>Kilometers per dag per vrachtwagen:</label>
-    <input type="number" id="kilometers" value="300" />
+      <label>Hoeveel kilometer rijdt één vrachtwagen per dag?*</label>
+      <input type="number" id="kilometers" value="300" required />
 
-    <label>Werkdagen per maand:</label>
-    <input type="number" id="werkdagen" value="22" />
+      <label
+        >Op hoeveel werkdagen per maand zijn de vrachtwagens onderweg?*</label
+      >
+      <input type="number" id="werkdagen" value="22" required />
 
-    <input type="hidden" id="impressies" value="5" />
+      <input type="hidden" id="impressies" value="5" required />
 
-    <div class="result" id="output">Maandelijkse impressies: 33.000</div>
+      <div class="result" id="output">Maandelijkse impressies: 33.000</div>
 
-    <button onclick="getReport()">Ontvang rapport</button>
+      <h2>Rapport aanvragen</h2>
+      <p>Uiteraard vrijblijvend.</p>
+
+      <input type="text" id="name" placeholder="Naam*" required />
+      <input type="text" id="company" placeholder="Bedrijfsnaam*" required />
+      <input type="email" id="email" placeholder="E-mailadres*" required />
+
+      <button onclick="getReport()">Aanvraag versturen</button>
+    </div>
 
     <script>
       function calculate() {
